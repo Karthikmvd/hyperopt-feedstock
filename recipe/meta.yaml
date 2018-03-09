@@ -1,0 +1,63 @@
+{% set name = "hyperopt" %}
+{% set version = "0.1" %}
+{% set file_ext = "tar.gz" %}
+{% set hash_type = "sha256" %}
+{% set hash_value = "4f6e903f7640165ea3e4c622050b41ffab0bee7811ede23c7825a5884976d72f" %}
+
+package:
+  name: '{{ name|lower }}'
+  version: '{{ version }}'
+
+source:
+  fn: '{{ name }}-{{ version }}.{{ file_ext }}'
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ file_ext }}
+  '{{ hash_type }}': '{{ hash_value }}'
+
+build:
+  number: 0
+  script: python setup.py install --single-version-externally-managed --record=record.txt
+
+requirements:
+  host:
+    - python
+    - setuptools
+    - numpy
+    - scipy
+    - nose
+    - pymongo
+    - six
+    - networkx
+    - future
+  run:
+    - python
+    - numpy
+    - scipy
+    - nose
+    - pymongo
+    - six
+    - networkx
+    - future
+
+test:
+  imports:
+    - hyperopt
+    - hyperopt.pyll
+    - hyperopt.pyll.tests
+    - hyperopt.tests
+
+about:
+  home: http://hyperopt.github.com/hyperopt/
+  license: BSD License
+  license_family: BSD
+  license_file: ''
+  summary: Distributed Asynchronous Hyperparameter Optimization
+  description: "hyperopt: Distributed Asynchronous Hyper-parameter Optimization\n===============================================================\n\nHyperopt is a Python library for serial and parallel optimization\
+    \ over awkward\nsearch spaces, which may include real-valued, discrete, and conditional\ndimensions.\n\nOfficial project git repository:\nhttp://github.com/hyperopt/hyperopt\n\nDocumentation:\nhttp://hyperopt.github.io/hyperopt\n\
+    \nAnnouncements mailing list:\nhttps://groups.google.com/forum/#!forum/hyperopt-announce\n\nDiscussion mailing list:\nhttps://groups.google.com/forum/#!forum/hyperopt-discuss\n\n\nThanks\n------\nThis\
+    \ project has received support from\n* National Science Foundation (IIS-0963668),\n* Banting Postdoctoral Fellowship program, \n* National Science and Engineering Research Council of Canada (NSERC),\n\
+    * D-Wave Systems, Inc."
+  doc_url: ''
+  dev_url: ''
+
+extra:
+  recipe-maintainers: ''
